@@ -41,10 +41,8 @@ def scrape():
     soup = get_html_soup(browser, 'https://mars.nasa.gov/news')
 
     # Scrape the NASA Mars News Site and collect the latest News Title and Paragraph Text. Assign the text to variables that you can reference later.
-    news_title = soup.find('li', class_='slide').find('div', class_='content_title').find('a').text.
+    news_title = soup.find('li', class_='slide').find('div', class_='content_title').find('a').text
     news_p = soup.find('li', class_='slide').find('div', class_='article_teaser_body').text
-
-    print(news_title)
 
     # Use splinter to navigate the site and find the image url for the current Featured Mars Image and assign the url string to a variable called featured_image_url.
     url = 'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html'
