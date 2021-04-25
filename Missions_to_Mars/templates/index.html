@@ -4,10 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    
+    <!-- How to CSS stylesheet when using Flask-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}"">
+    <title>Mission to Mars</title>
 </head>
-<body>
-    This is a testing. Pls ignore
-    {{ mars_data }}
+<body style="max-width: 80%; margin: auto;">
+    <div class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+          <h1 class="display-4">Mission to Mars</h1>
+          <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
+        </div>
+    </div>
+
+    <h3>Latest Mars News</h3>
+    <b>{{mars_data.news_title}}</b>
+    <p>{{mars_data.news_p}}</p>
+
+
+    <img src="{{mars_data.featured_image_url}}" class="img-fluid" alt="Featured Mars Image">
+    <hr>
+
+    <h2 class="text-center">Mars Hemispheres</h2>
+
+    <!-- Used Grid Card at https://getbootstrap.com/docs/5.0/components/card/ -->
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for img in mars_data.hemisphere_image_urls %}
+        <div class="col">
+          <div class="card">
+            <img src="{{img.img_url}}" class="card-img-top" alt="{{img.title}}">
+            <div class="card-body">
+              <h5 class="card-title">{{img.title}}</h5>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
